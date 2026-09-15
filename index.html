@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 02 - Sistemas de Informação: Conceito e Tipos | SENAC PGSS</title>
+    <meta name="description" content="Material educativo sobre fundamentos de Sistemas de Informação, tipos, categorias e aplicações nas organizações.">
+    <meta name="theme-color" content="#0f172a">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #0099cc;
+            --secondary: #a855f7;
+            --bg-dark: #0f172a;
+            --bg-darker: #051121;
+            --bg-card: #1a2a47;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-color: #1e293b;
+            --accent: #f97316;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Customizado */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Hero */
+        .hero {
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.1), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        /* Animations */
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% center;
+            }
+            50% {
+                background-position: 100% center;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(30px);
+            }
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: slide-in 0.6s ease;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.1);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .card-meta {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Table Moderno */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: var(--bg-darker);
+            color: var(--primary);
+            padding: 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Componentes Específicos */
+        .definition-box {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(168, 85, 247, 0.1));
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            animation: slide-in 0.6s ease;
+        }
+
+        .definition-box h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .definition-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-item {
+            flex: 1;
+            min-width: 150px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .flow-item::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .flow-item:last-child::after {
+            content: '';
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            animation: slide-in 0.6s ease;
+        }
+
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 700;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .timeline-marker::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(180deg, var(--primary), transparent);
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item:last-child .timeline-marker::after {
+            display: none;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--primary);
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        .badge.secondary {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .badge.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsivo */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-item {
+                width: 100%;
+            }
+
+            .flow-item::after {
+                content: '↓';
+                right: 50%;
+                transform: translateX(50%);
+            }
+
+            .timeline-item {
+                gap: 1rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+
+            .nav-links {
+                gap: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card h3 {
+                font-size: 1.2rem;
+            }
+
+            .definition-box {
+                padding: 1.5rem;
+            }
+
+            .cta-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Visibilidade incrementada */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">📡 Sistemas de Informação</div>
+            <ul class="nav-links">
+                <li><a href="#conceito">Conceito</a></li>
+                <li><a href="#dado-info">Dados</a></li>
+                <li><a href="#categorias">Categorias</a></li>
+                <li><a href="#ciclo">Ciclo de Vida</a></li>
+                <li><a href="#componentes">Componentes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sistemas de Informação</h1>
+            <p>Conceitos fundamentais, tipos e aplicações nas organizações modernas</p>
+            <a href="#conceito" class="cta-button">Iniciar Aprendizado</a>
+        </div>
+    </section>
+
+    <!-- Seção: O que é Sistema de Informação -->
+    <section id="conceito">
+        <div class="container">
+            <h2 class="section-title">O que é um Sistema de Informação?</h2>
+
+            <div class="definition-box">
+                <h4>📊 Definição</h4>
+                <p>Um <strong>Sistema de Informação (SI)</strong> é um conjunto organizado de componentes integrados que trabalham em harmonia para coletar, processar, armazenar e distribuir informações úteis aos usuários e stakeholders das organizações.</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Coleta de Dados</h3>
+                    <p>Captura de dados de diversas fontes e sistemas, estruturando as informações para processamento.</p>
+                    <div class="card-meta">Entrada de dados brutos</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Processamento</h3>
+                    <p>Transformação de dados brutos em informações úteis e significativas através de algoritmos e regras.</p>
+                    <div class="card-meta">Lógica operacional</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💾</div>
+                    <h3>Armazenamento</h3>
+                    <p>Manutenção segura e organizada de informações em banco de dados e sistemas de arquivo.</p>
+                    <div class="card-meta">Persistência de dados</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📤</div>
+                    <h3>Distribuição</h3>
+                    <p>Disponibilização de informações aos usuários corretos, no momento certo, em formato adequado.</p>
+                    <div class="card-meta">Saída e visualização</div>
+                </div>
+            </div>
+
+            <div class="definition-box" style="margin-top: 3rem;">
+                <h4>🎯 Importância Estratégica</h4>
+                <p>Os Sistemas de Informação são <strong>fundamentais</strong> para o funcionamento das organizações modernas, facilitando a <strong>tomada de decisões estratégicas</strong>, a <strong>automação de processos</strong> e a geração de <strong>vantagem competitiva</strong> no mercado.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: Dado × Informação × Conhecimento -->
+    <section id="dado-info">
+        <div class="container">
+            <h2 class="section-title">Dado × Informação × Conhecimento</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>📝 Dados</h4>
+                        <p>Fatos e valores brutos, desorganizados e sem contexto. Exemplo: "50", "João", "2026-09-15"</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>💡 Informação</h4>
+                        <p>Dados processados e contextualizados que agregam significado. Exemplo: "João vendeu 50 unidades em 15/09/2026"</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>🧠 Conhecimento</h4>
+                        <p>Informação interpretada, compreendida e aplicável à decisão. Exemplo: "As vendas de João cresceram 15% este mês, indicando melhor performance de mercado"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="definition-box" style="margin-top: 3rem;">
+                <h4>🔄 Transformação Contínua</h4>
+                <p>Um SI eficiente transforma dados em informação, e a informação em conhecimento utilizável para decisões estratégicas e operacionais.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: Ciclo de Vida -->
+    <section id="ciclo">
+        <div class="container">
+            <h2 class="section-title">Ciclo de Vida de um Sistema de Informação</h2>
+
+            <div class="flow-diagram">
+                <div class="flow-item">📥 Entrada</div>
+                <div class="flow-item">⚙️ Processamento</div>
+                <div class="flow-item">💾 Armazenamento</div>
+                <div class="flow-item">📤 Distribuição</div>
+                <div class="flow-item">✅ Utilização</div>
+            </div>
+
+            <div class="card-grid" style="margin-top: 3rem;">
+                <div class="card">
+                    <div class="card-icon">📥</div>
+                    <h3>1. Entrada (Input)</h3>
+                    <p>Coleta de dados brutos de diversas fontes: sensores, formulários, transações, APIs externas.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>2. Processamento (Processing)</h3>
+                    <p>Transformação de dados em informações através de regras, cálculos e lógica de negócio.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💾</div>
+                    <h3>3. Saída (Output)</h3>
+                    <p>Geração de relatórios, dashboards, insights e visualizações de dados processados.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3>4. Retroalimentação (Feedback)</h3>
+                    <p>Avaliação dos resultados, validação de informações e melhorias contínuas do sistema.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: Categorias de Sistemas -->
+    <section id="categorias">
+        <div class="container">
+            <h2 class="section-title">Principais Categorias de Sistemas</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3>SPT - Sistema de Processamento de Transações</h3>
+                    <p>Automatiza operações rotineiras e repetitivas das organizações, processando grande volume de dados em tempo real.</p>
+                    <div class="card-meta">
+                        <strong>Exemplos:</strong><br>
+                        • Folha de pagamento<br>
+                        • Controle de estoque<br>
+                        • Sistema de vendas<br>
+                        <br>
+                        <span class="badge">Eficiência Operacional</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>SIG - Sistema de Informação Gerencial</h3>
+                    <p>Fornece relatórios e informações estruturadas para que gerentes e líderes tomem decisões tática e operacionalmente informadas.</p>
+                    <div class="card-meta">
+                        <strong>Exemplos:</strong><br>
+                        • Dashboards gerenciais<br>
+                        • Relatórios de vendas<br>
+                        • Análise de performance<br>
+                        <br>
+                        <span class="badge secondary">Apoio à Gestão</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>SSD - Sistema de Suporte à Decisão</h3>
+                    <p>Analisa dados complexos e cenários para auxiliar na tomada de decisões estratégicas e de longo prazo.</p>
+                    <div class="card-meta">
+                        <strong>Exemplos:</strong><br>
+                        • Simulações de cenários<br>
+                        • Business Intelligence<br>
+                        • Análise preditiva<br>
+                        <br>
+                        <span class="badge secondary">Decisões Estratégicas</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>EIS - Sistema de Informação Executiva</h3>
+                    <p>Oferece visão geral, estratégica e consolidada das operações para executivos e diretoria.</p>
+                    <div class="card-meta">
+                        <strong>Exemplos:</strong><br>
+                        • KPIs de negócio<br>
+                        • Executive dashboards<br>
+                        • Indicadores estratégicos<br>
+                        <br>
+                        <span class="badge success">Estratégia Corporativa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela Comparativa -->
+            <div class="table-container" style="margin-top: 3rem;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo de Sistema</th>
+                            <th>Usuários-Alvo</th>
+                            <th>Foco Principal</th>
+                            <th>Frequência de Uso</th>
+                            <th>Dados Processados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SPT</strong></td>
+                            <td>Operadores, Executores</td>
+                            <td>Eficiência Operacional</td>
+                            <td>Contínuo, Real-time</td>
+                            <td>Alto volume, transações</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SIG</strong></td>
+                            <td>Gerentes, Supervisores</td>
+                            <td>Apoio à Gestão Tática</td>
+                            <td>Diário, Semanal</td>
+                            <td>Dados resumidos, relatórios</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SSD</strong></td>
+                            <td>Analistas, Especialistas</td>
+                            <td>Análise Estratégica</td>
+                            <td>Conforme necessário</td>
+                            <td>Dados complexos, cenários</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EIS</strong></td>
+                            <td>Executivos, Diretoria</td>
+                            <td>Visão Estratégica</td>
+                            <td>Mensal, Trimestral</td>
+                            <td>KPIs consolidados</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: Componentes -->
+    <section id="componentes">
+        <div class="container">
+            <h2 class="section-title">Componentes Essenciais de um SI</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Descrição</th>
+                            <th>Exemplos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>💻 Hardware</strong></td>
+                            <td>Equipamentos físicos que suportam a infraestrutura do sistema</td>
+                            <td>Servidores, computadores, roteadores, impressoras</td>
+                        </tr>
+                        <tr>
+                            <td><strong>📱 Software</strong></td>
+                            <td>Programas e aplicações que definem o funcionamento do SI</td>
+                            <td>Sistemas operacionais, aplicativos, plataformas web</td>
+                        </tr>
+                        <tr>
+                            <td><strong>👥 Pessoas</strong></td>
+                            <td>Usuários, analistas, administradores e profissionais de TI</td>
+                            <td>Desenvolvedores, DBAs, suporte técnico, usuários finais</td>
+                        </tr>
+                        <tr>
+                            <td><strong>📊 Dados</strong></td>
+                            <td>Informações e fatos processados e armazenados</td>
+                            <td>Bancos de dados, arquivos, data lakes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>⚙️ Processos</strong></td>
+                            <td>Procedimentos, workflows e regras de negócio implementadas</td>
+                            <td>Fluxos de trabalho, políticas, automações</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🌐 Rede</strong></td>
+                            <td>Infraestrutura de comunicação e conectividade entre componentes</td>
+                            <td>Internet, Intranet, VPN, Cloud</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="definition-box" style="margin-top: 3rem;">
+                <h4>🔗 Integração Essencial</h4>
+                <p>Um SI eficiente depende da <strong>integração harmoniosa</strong> de todos os seus componentes. A falha em qualquer um deles pode comprometer todo o sistema e afetar diretamente as operações e decisões organizacionais.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: Resumo Final -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Resumo e Principais Conceitos</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Objetivo Central</h3>
+                    <p>Transformar dados brutos em informações úteis que suportem a tomada de decisões e a automação de processos organizacionais.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3>Processo Contínuo</h3>
+                    <p>Os Sistemas de Informação funcionam em ciclos: coleta → processamento → armazenamento → distribuição → retroalimentação.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Categorias Estratificadas</h3>
+                    <p>Diferentes tipos de SI atendem diferentes níveis organizacionais (operacional, tático e estratégico).</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>Diferencial Competitivo</h3>
+                    <p>Investimento em SI moderno gera eficiência, agilidade e vantagem competitiva no mercado digital.</p>
+                </div>
+            </div>
+
+            <div class="definition-box" style="margin-top: 3rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(0, 217, 255, 0.1)); border-left-color: var(--success);">
+                <h4>✅ Conclusão</h4>
+                <p>Compreender os conceitos, tipos e componentes dos Sistemas de Informação é <strong>essencial</strong> para profissionais de TI e gestão. Esses sistemas são a <strong>espinha dorsal</strong> das organizações modernas, impulsionando transformação digital e competitividade no mercado global.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Aula 02: Sistemas de Informação - Conceito e Tipos</strong></p>
+        <p>Curso: Sistemas de Informação | SENAC/PGSS | Setembro 2026</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">Material desenvolvido para fins educacionais • 
+        <a href="https://github.com/washington-dev466/pgss-senac-lowrider" target="_blank">GitHub</a> •
+        Design moderno e responsivo</p>
+    </footer>
+</body>
+</html>
